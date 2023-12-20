@@ -7,7 +7,15 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you will handle the form submission to the Flask API
+    try {
+      const response = await axios.post('http://localhost:5000/add_user', {
+        username,
+        email
+      });
+      console.log('User added:', response.data);
+    } catch (error) {
+      console.error('Error adding user:', error);
+    }
   };
 
   return (

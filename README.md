@@ -27,4 +27,6 @@ Postgre SQL is what is
 
 This is a Javascript Library that will serve as the front end for this project. 
 
+## ORM
 
+What is ORM? ORM stands for. 
