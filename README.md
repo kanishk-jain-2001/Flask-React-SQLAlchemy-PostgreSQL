@@ -12,7 +12,6 @@ We all know what python is. It is a really powerful coding language that will se
 ## Flask 
 
 
-
 ## React 
 
 ## SQLAlchemy 
