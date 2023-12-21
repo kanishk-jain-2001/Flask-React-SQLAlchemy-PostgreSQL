@@ -60,6 +60,9 @@ Sometimes the requests get blocked. CORS helps bypass this.
 
 React is a Javascript based tool to develop the frontend for web applications
 
+#### Hooks 
+React Hooks are functions that let you "hook into" React state and lifecycle features from function components. React Hooks simplify the code, making it easier to use state and other React features without the complexity of classes. They enable better code reuse and composition, leading to cleaner and more intuitive code designs.
+
 ### Axios 
 
 Axios is a promise-based HTTP client for making requests to external services.
