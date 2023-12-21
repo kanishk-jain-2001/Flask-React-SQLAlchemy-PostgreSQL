@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 if __name__ == '__main__':
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost/mydatabase'
     db = SQLAlchemy(app)
@@ -25,11 +25,17 @@ if __name__ == '__main__':
         new_user = User(username=data['username'], email=data['email'])
         db.session.add(new_user)
         db.session.commit()
-        return jsonify(new_user.to_dict()), 201
+        # Convert new_user to a dictionary 
+        user_data = {
+        'id': new_user.id,  # Assuming the User model has an id field
+        'username': new_user.username,
+        'email': new_user.email
+        }
+        return jsonify(user_data), 201
 
     with app.app_context():
         db.create_all()
-        
-    app.run(debug=True)
+
+    app.run()
 
 
