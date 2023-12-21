@@ -3,30 +3,20 @@ Simple App I created that uses Python, React, Flask-SQLAlchemy, and PostgreSQL.
 
 The app will take Amazon Food Reviews and put it in a SQL Database. It will allow the user to search for different aspects of the code. 
 
-# Some background information about these technologies 
+## Web Server Gateway Interface
 
-## Python 
 
-We all know what python is. It is a really powerful coding language that will serve as the backend for this project. 
+## ORM 
+Before we continue, it would be beneficial to learn what ORM is. From wikipedia: "Object–relational mapping (ORM, O/RM, and O/R mapping tool) in computer science is a programming technique for converting data between a relational database and the heap of an object-oriented programming language"
 
-## Flask 
+## Backend 
 
-Flask is a python library. It is a backend framework used in web development. 
+The important file here is 'server.py' (located in the backend folder) 
+This file is what communicates with the PostgreSQL database, adding and searching for the Username and Email's for users. 
 
-## SQLAlchemy 
+### Libraries 
+Flask is what runs the backend. Just for reiteration, Flask a Python Library that handles. 
 
-SQL Alchemy allows us to use ORM on our databases. 
 
-## FlaskSQLAlchemy
-
-## PostgreSQL 
-
-Postgre SQL is what is 
-
-## React 
-
-This is a Javascript Library that will serve as the front end for this project. 
-
-## ORM
-
-What is ORM? ORM stands for. 
+Here are some of the tools used in the backend: 
+### SQL Alchemy 
