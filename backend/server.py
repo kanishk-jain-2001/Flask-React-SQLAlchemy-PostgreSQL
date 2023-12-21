@@ -18,9 +18,10 @@ if __name__ == '__main__':
     # Creates an instance of the SQLAlchemy class, passing the Flask app
     db = SQLAlchemy(app) 
 
-    # Define a User model for SQLAlchemy
+    # Define a User model for SQLAlchemy. Can also specify table name, but defaults to 'user'
     class User(db.Model):
-        # Define the columns for the User table
+        __tablename__ = "user"  #best practice, is that SQL table names are lowercase with underscore (snake case). For class, it is Camel case
+        # Define the columns for the user table
         id = db.Column(db.Integer, primary_key=True) # A primary key is a unique identifier for each row in the database.
         username = db.Column(db.String(80), unique=True, nullable=False)
         email = db.Column(db.String(120), unique=True, nullable=False)
