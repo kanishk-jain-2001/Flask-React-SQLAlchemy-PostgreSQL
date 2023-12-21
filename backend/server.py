@@ -1,24 +1,34 @@
-# imports 
+# Imported Libraries. 
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy 
 from flask_cors import CORS
 
+
 if __name__ == '__main__':
-    app = Flask(__name__)
+
+    # Initialize Flask app
+    app = Flask(__name__) 
+
+    # Enable Cross-Origin Resource Sharing (CORS) for the Flask app
     CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-
+    
+    # Configure the SQLAlchemy database URI
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123@localhost/mydatabase'
-    db = SQLAlchemy(app)
 
+    # Creates an instance of the SQLAlchemy class, passing the Flask app
+    db = SQLAlchemy(app) 
+
+    # Define a User model for SQLAlchemy
     class User(db.Model):
-
-        id = db.Column(db.Integer, primary_key=True)
+        # Define the columns for the User table
+        id = db.Column(db.Integer, primary_key=True) # A primary key is a unique identifier for each row in the database.
         username = db.Column(db.String(80), unique=True, nullable=False)
         email = db.Column(db.String(120), unique=True, nullable=False)
 
         def __repr__(self):
             return '<User %r>' % self.username
         
+    # Add user endpoint
     @app.route('/add_user', methods=['POST'])
     def add_user():
         data = request.json
@@ -33,6 +43,7 @@ if __name__ == '__main__':
         }
         return jsonify(user_data), 201
     
+    # Find user endpoint
     @app.route('/find_user', methods=['GET'])
     def find_user():
         username = request.args.get('username')
@@ -44,9 +55,11 @@ if __name__ == '__main__':
         else:
             return jsonify({"message": "User not found"}), 404
 
+    # Create tables in the database as per the defined models
     with app.app_context():
         db.create_all()
 
+    # Run the Flask Application
     app.run(debug=True)
 
 
