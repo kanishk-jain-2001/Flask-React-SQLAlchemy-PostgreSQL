@@ -32,10 +32,21 @@ if __name__ == '__main__':
         'email': new_user.email
         }
         return jsonify(user_data), 201
+    
+    @app.route('/find_user', methods=['GET'])
+    def find_user():
+        username = request.args.get('username')
+        if not username:
+            return jsonify({"message": "Username is required"}), 400
+        user = User.query.filter_by(username=username).first()
+        if user:
+            return jsonify({"email": user.email}), 200
+        else:
+            return jsonify({"message": "User not found"}), 404
 
     with app.app_context():
         db.create_all()
 
-    app.run()
+    app.run(debug=True)
 
 

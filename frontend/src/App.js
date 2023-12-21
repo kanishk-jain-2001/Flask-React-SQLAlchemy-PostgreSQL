@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
-
 function App() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [inputResult, setinputResult] = useState('');
+  const [search, setSearch] = useState('');
+  const [searchResult, setSearchResult] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,8 +17,25 @@ function App() {
         email
       });
       console.log('User added:', response.data);
+      setinputResult('User Added')
     } catch (error) {
       console.error('Error adding user:', error);
+      setinputResult('Error adding user: ' + error);
+    }
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(`http://localhost:5000/find_user?username=${search}`);
+      if (response.data) {
+        setSearchResult(`Email: ${response.data.email}`);
+      } else {
+        setSearchResult('User not found');
+      }
+    } catch (error) {
+      console.error('Error searching for user:', error);
+      setSearchResult('Error searching for user');
     }
   };
 
@@ -36,8 +55,19 @@ function App() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Add User</button>
         </form>
+        {inputResult && <p>{inputResult}</p>}
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search Username"
+          />
+          <button type="submit">Search User</button>
+        </form>
+        {searchResult && <p>{searchResult}</p>}
       </header>
     </div>
   );
