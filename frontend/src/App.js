@@ -1,17 +1,25 @@
+// Importing React and useState hook from React library
 import React, { useState } from 'react';
+// Importing axios for making HTTP requests
 import axios from 'axios';
+// Importing CSS styles for the App component
 import './App.css';
 
+
+// Defining the App functional component
 function App() {
+  // State hooks for managing username, email, input result, search, and search result
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [inputResult, setinputResult] = useState('');
   const [search, setSearch] = useState('');
   const [searchResult, setSearchResult] = useState('');
 
+  // Function to handle the submit event for adding a user
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevents the default form submit action
     try {
+      // Makes a POST request to add a user with username and email
       const response = await axios.post('http://localhost:5000/add_user', {
         username,
         email
@@ -23,7 +31,8 @@ function App() {
       setinputResult('Error adding user: ' + error);
     }
   };
-
+  
+   // Function to handle the submit event for searching a user
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
@@ -39,6 +48,7 @@ function App() {
     }
   };
 
+  // JSX returned by the App component
   return (
     <div className="App">
       <header className="App-header">
